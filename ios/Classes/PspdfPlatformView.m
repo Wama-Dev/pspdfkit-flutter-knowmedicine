@@ -85,6 +85,8 @@
             _pdfViewController.appearanceModeManager.appearanceMode = [PspdfkitFlutterConverter appearanceMode:configurationDictionary];
             _pdfViewController.pageIndex = [PspdfkitFlutterConverter pageIndex:configurationDictionary];
             _pdfViewController.delegate = self;
+            _pdfViewController.annotationToolbarController.toolbar.dragEnabled = false;
+            _pdfViewController.annotationToolbarController.toolbar.toolbarPosition = PSPDFFlexibleToolbarPositionTop;
             
             [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(documentDidFinishRendering) name:PSPDFDocumentViewControllerDidConfigureSpreadViewNotification object:nil];
 
