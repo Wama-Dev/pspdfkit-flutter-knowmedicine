@@ -128,11 +128,18 @@ internal class PSPDFKitView(
                 context: Context
             ) {
                 if (f.tag?.contains("Nutrient.Fragment") == true) {
-                    if (toolbarGroupingItems != null) {
+                    /*if (toolbarGroupingItems != null) {
                         val groupingRule = FlutterMenuGroupingRule(context, toolbarGroupingItems)
                         val flutterViewModeController = FlutterViewModeController(groupingRule)
                        pdfUiFragment.setOnContextualToolbarLifecycleListener(flutterViewModeController)
+                    }*/
+
+                    var groupingRule: FlutterMenuGroupingRule? = null;
+                    if (toolbarGroupingItems != null) {
+                        groupingRule = FlutterMenuGroupingRule(context, toolbarGroupingItems)
                     }
+                    val flutterViewModeController = FlutterViewModeController(groupingRule)
+                    pdfUiFragment.setOnContextualToolbarLifecycleListener(flutterViewModeController)
 
                     // Process custom toolbar items
                     if (customToolbarItems?.isNotEmpty() == true && f is PdfFragment) {

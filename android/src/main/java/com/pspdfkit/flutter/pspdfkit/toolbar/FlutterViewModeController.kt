@@ -16,6 +16,8 @@ import com.pspdfkit.ui.toolbar.AnnotationCreationToolbar
 import com.pspdfkit.ui.toolbar.ContextualToolbar
 import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout.OnContextualToolbarLifecycleListener
 import com.pspdfkit.ui.toolbar.grouping.MenuItemGroupingRule
+import com.pspdfkit.ui.toolbar.ToolbarCoordinatorLayout
+import java.util.EnumSet
 
 /**
  * Keeps track of the currently active mode and handles updating the toolbar states.
@@ -23,11 +25,22 @@ import com.pspdfkit.ui.toolbar.grouping.MenuItemGroupingRule
 internal class FlutterViewModeController(private val itemGroupingRule: MenuItemGroupingRule?) :
     OnContextualToolbarLifecycleListener {
 
+    /*override fun onPrepareContextualToolbar(contextualToolbar: ContextualToolbar<*>) {
+        if (contextualToolbar is AnnotationCreationToolbar) {
+            if (itemGroupingRule != null) {
+                contextualToolbar.setMenuItemGroupingRule(itemGroupingRule)
+            }
+        }
+    }*/
     override fun onPrepareContextualToolbar(contextualToolbar: ContextualToolbar<*>) {
         if (contextualToolbar is AnnotationCreationToolbar) {
             if (itemGroupingRule != null) {
                 contextualToolbar.setMenuItemGroupingRule(itemGroupingRule)
             }
+            contextualToolbar.layoutParams = ToolbarCoordinatorLayout.LayoutParams(
+                ToolbarCoordinatorLayout.LayoutParams.Position.TOP, EnumSet.of(
+                    ToolbarCoordinatorLayout.LayoutParams.Position.TOP)
+            )
         }
     }
 
